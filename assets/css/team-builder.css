@@ -11,3 +11,17 @@ figure > figcaption {
 #import-export-modal textarea {
     min-height: 20vh;
 }
+
+@media (max-width: 767.98px) {
+    figure > figcaption {
+        display: none;
+    }
+
+    #team-roster > .button-container > button {
+        width: 100%;
+    }
+
+    #team-roster > .button-container > button:not(:first-child) {
+        margin-top: 0.5rem;
+    }
+}

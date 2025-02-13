@@ -13,7 +13,6 @@
         ["Vyntusius", 809631, "vyntusius"],
         ["Ain", 280464, "clockworkfigure"],
         ["Vargas", 1837372, "nanamin", "Nanamin's alt"],
-        ["Vincennes", 470422, "simonbastard_18427"],
         ["RUBEIDO", 41218, "rubeido"],
         ["Kairu", 466557, "xdkairu"],
         ["neonzaro", 968316, "N/A"],

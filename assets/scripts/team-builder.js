@@ -201,7 +201,7 @@
      */
     const generateImportExportModalButton = container => {
         const saveButton = $( "<button>", {
-            "class": "btn btn-light ms-2",
+            "class": "btn btn-light ms-md-2",
             "data-bs-target": "#import-export-modal",
             "data-bs-toggle": "modal",
             type: "button"
@@ -232,11 +232,10 @@
      */
     const generateInitialState = () => {
         for ( let i = 0; i < NUMBER_OF_TEAMS; i++ ) {
-            let container = $( "<div>", { "class": "container-fluid col-8 bg-secondary rounded mt-2 pt-4 pe-4 team-box" } )
-            let row = $( "<div>", { "class": "row" } )
-            let teamLabel = $( "<div>", { "class": "col-2 d-flex justify-content-center align-items-center" } )
+            let container = $( "<div>", { "class": "container-fluid col-md-10 d-flex justify-content-evenly bg-secondary rounded mt-2 pt-4 pe-md-4 team-box" } )
+            let teamLabel = $( "<div>", { "class": "d-none d-md-flex justify-content-center align-items-center" } )
             let labelFormat = $( "<span>", { "class": "text-center fw-bold pb-3 user-select-none" } )
-            let dollBox = $( "<div>", { "class": "col-2" } )
+            let dollBox = $( "<div>", { "class": "" } )
             let figure = $( "<figure>", { "class": "figure" } )
             let img = $( "<img>", { "class": "img-fluid rounded mx-auto d-block user-select-none", src: PLACEHOLDER_IMG, alt: "Empty" } )
             let figcaption = $( "<figcaption>", { "class": "figure-caption text-center user-select-none" } )
@@ -251,6 +250,8 @@
                 const teamIndex = parseInt( teamBox.parent().siblings().eq( 0 ).text().at( -1 ) ) - 1
                 const doll = getDollName( teamBox.find( "img" ).attr( "src" ) )
                 const clickedIndex = getTeamsOnlyDolls()[teamIndex].findIndex( d => d === doll )
+
+                if ( doll === "placeholder" ) return
 
                 for ( let i = clickedIndex; i < DOLLS_PER_TEAM; i++ ) {
                     const currentSlot = state.dollSlots[teamIndex][i]
@@ -295,20 +296,23 @@
             teamLabel.append( labelFormat )
             labelFormat.text( `Team ${i + 1}` )
 
-            row.append( teamLabel )
+            container.append( teamLabel )
 
             for ( let j = 0; j < DOLLS_PER_TEAM; j++ ) {
                 let clone = dollBox.clone( true )
                 state.dollSlots[i].push( clone )
-                row.append( clone )
+                container.append( clone )
             }
-
-            container.append( row )
 
             container.on( "click", event => {
                 $( ".team-box" ).removeClass( "bg-primary" ).addClass( "bg-secondary" )
+
                 state.selectedTeam = i;
-                $( event.target ).parents( ".team-box" ).removeClass( "bg-secondary" ).addClass( "bg-primary" )
+
+                let teamBox = $( event.target )
+                if ( !teamBox.hasClass( "team-box" ) ) teamBox = $( event.target ).parents( ".team-box" )
+
+                teamBox.removeClass( "bg-secondary" ).addClass( "bg-primary" )
             })
 
             $( "#team-roster" ).append( container )
@@ -320,7 +324,7 @@
      * @param {jQuery} container The container to add this button to.
      */
     const generateResetButton = container => {
-        const resetButton = $( "<button>", { "class": "btn btn-danger me-auto", type: "button" } )
+        const resetButton = $( "<button>", { "class": "btn btn-danger me-md-auto", type: "button" } )
         resetButton.text( "Reset" )
         container.append( resetButton )
 
@@ -342,6 +346,7 @@
             })
             state.selectedDolls = []
 
+            // Remove the team/support indicators
             updateTeamIndicators()
         })
     }
@@ -505,7 +510,7 @@
     generateInitialState()
 
     // Modal buttons
-    const buttonContainer = $( "<div>", { "class": "container-fluid col-8 mt-3 d-flex flex-row justify-content-end p-0" } )
+    const buttonContainer = $( "<div>", { "class": "container-fluid col-md-10 mt-2 mt-md-3 grid gap-2 d-md-flex flex-md-row justify-content-end button-container" } )
     generateResetButton( buttonContainer )
     generateAccountChangeButton( buttonContainer )
     generateImportExportModalButton( buttonContainer )
