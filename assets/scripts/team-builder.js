@@ -505,7 +505,7 @@
     generateInitialState()
 
     // Modal buttons
-    const buttonContainer = $( "<div>", { "class": "container-fluid col-8 mt-3 d-flex flex-row justify-content-end" } )
+    const buttonContainer = $( "<div>", { "class": "container-fluid col-8 mt-3 d-flex flex-row justify-content-end p-0" } )
     generateResetButton( buttonContainer )
     generateAccountChangeButton( buttonContainer )
     generateImportExportModalButton( buttonContainer )
