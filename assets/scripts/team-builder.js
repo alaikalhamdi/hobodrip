@@ -341,6 +341,8 @@
                 teams: [Array( 5 ).fill( "" ), Array( 5 ).fill( "" ), Array( 5 ).fill( "" )]
             })
             state.selectedDolls = []
+
+            updateTeamIndicators()
         })
     }
 
